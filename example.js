@@ -5,6 +5,7 @@ var ballX;
 var ballY;
 var ballRadius;
 var ballXVelocity;
+var ballYVelocity;
 var ballGrowth;
 
 // initialize global variables in setup() function
@@ -13,10 +14,11 @@ function setup() {
   p5Canvas.parent("#p5-canvas");
   myName = select("#my-name");
   myName.html("Teacher");
-  ballX = width / 2;
+  ballX = width /2;
   ballY = height / 2;
   ballRadius = 50;
   ballXVelocity = 10;
+  ballYVelocity = 10;
   ballGrowth = 10;
 }
 
@@ -30,12 +32,19 @@ function draw() {
 function drawBall() {
   if(ballX >= width - ballRadius || ballX <= 0 + ballRadius) {
     ballXVelocity *= -1;
+    
+  }
+  if(ballY >= height - ballRadius || ballY <= 0 + ballRadius) {
+    ballYVelocity *= -1;
   }
   var circumference = getCircumference(); // local variable
   if(circumference >= 600 || circumference <= 160) {
     ballGrowth *= -1;
   }
   ballX += ballXVelocity;
+    
+  ballY += ballYVelocity;
+  
   //ballRadius += ballGrowth; // Uncomment this line for a "pulsing" effect!
   var ballDiameter = ballRadius * 2; // local variable
   fill("orange");
@@ -57,7 +66,7 @@ function drawSquares(num) {
     var randomBlue = random(255);
     fill(randomRed, randomGreen, randomBlue);
     rect(randomX, randomY, randomLength, randomLength);
-    num--;
+    nm--;
   }
 }
 
